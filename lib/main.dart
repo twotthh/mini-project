@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:project_mini/screens/home_screen.dart';
-import 'package:project_mini/screens/main_screen.dart';
+import 'package:heycoun/screens/main_screen.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initializeDateFormatting();
+
   runApp(MyApp());
 }
 
@@ -12,11 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Chatting app',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          primarySwatch: Colors.deepPurple,
-      ),
       home: LoginSignupScreen(),
     );
   }
