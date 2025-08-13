@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:project_mini/chatting/component/message.dart';
-import 'package:project_mini/chatting/component/new_message.dart';
+import 'package:heycoun/screens/home_screen.dart';
+import 'package:heycoun/chatting/component/message.dart';
+import 'package:heycoun/chatting/component/new_message.dart';
+import 'package:heycoun/config/palette.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({Key? key}) : super(key: key);
@@ -10,16 +12,16 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  final String currentUserId = 'user1'; // 가짜 로그인 유저 ID
+  final String currentUserId = 'user1';
   final String currentUserName = '서현';
-  final String currentUserImage = 'image/eggtart.jpg';
+  final String currentUserImage = 'images/eggtart.jpg';
 
   final List<Map<String, dynamic>> _messages = [
     {
       'text': '안녕~',
       'userID': 'user1',
       'userName': '서현',
-      'userImage': 'image/eggtart.jpg'
+      'userImage': 'images/eggtart.jpg'
     },
   ];
 
@@ -35,20 +37,37 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   void _signOut() {
-    // 로컬이라 실제 로그아웃 기능 없음. 필요시 구현 가능
+    // 실제 로그아웃 기능 없음
     print('User signed out');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFAFAFA),
+      backgroundColor: const Color(0xFFF5F5F5),
       appBar: AppBar(
-        backgroundColor: Color(0xFF81758C),
-        title: const Text('MyChat'),
+        backgroundColor: Palette.mainColor2,
+        title: const Text(
+          'Chatting..',
+          style: TextStyle(fontWeight: FontWeight.w600, color: Color(0XFFFAFAFA)),
+        ),
+        centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Color(0XFFFAFAFA)),
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return HomeScreen();
+                  },
+                ),
+            );
+          },
+        ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.exit_to_app_rounded, color: Color(0xFF81758C)),
+            icon: const Icon(Icons.exit_to_app_rounded, color: Palette.mainColor2),
             onPressed: _signOut,
           ),
         ],
