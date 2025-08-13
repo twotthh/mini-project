@@ -6,11 +6,7 @@ import 'package:heycoun/screens/main_screen.dart';
 import 'package:heycoun/screens/calendar_screen.dart';
 
 class HomeScreen extends StatelessWidget {
-  final String username;
-  final String email;
-  final String password;
-
-  const HomeScreen({Key? key, required this.username, required this.email, required this.password}) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +63,7 @@ class HomeScreen extends StatelessWidget {
               height: 200,
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
-                itemCount: 5,
+                itemCount: 9,
                 separatorBuilder: (_, __) => SizedBox(width: 12),
                 itemBuilder: (_, index) => Container(
                   width: 180,
@@ -155,10 +151,9 @@ class HomeScreen extends StatelessWidget {
               currentAccountPicture: const CircleAvatar(
                 backgroundImage: AssetImage('images/eggtart.jpg'),
               ),
-              accountName: const Text(
-                  '서현',
+              accountName: const Text('서현',
                   style: TextStyle(fontWeight: FontWeight.w600)),
-              accountEmail: const Text('email',
+              accountEmail: const Text('abc12345@naver.com',
                   style: TextStyle(fontWeight: FontWeight.w600)),
               onDetailsPressed: () {},
               decoration: const BoxDecoration(
