@@ -23,84 +23,54 @@ class ChatBubbles extends StatelessWidget {
       avatarImage = AssetImage(userImage);
     }
 
-    return Stack(children: [
-      Row(
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
         mainAxisAlignment:
         isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          if (isMe)
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 10, 45, 0),
-              child: ChatBubble(
-                clipper: ChatBubbleClipper8(type: BubbleType.sendBubble),
-                alignment: Alignment.topRight,
-                margin: EdgeInsets.only(top: 20),
-                backGroundColor: Color(0xFFD4D6D5),
-                child: Container(
-                  constraints: BoxConstraints(
-                    maxWidth: MediaQuery.of(context).size.width * 0.7,
+          if (!isMe) CircleAvatar(radius: 16, backgroundImage: avatarImage),
+          const SizedBox(width: 6),
+          ChatBubble(
+            clipper: ChatBubbleClipper8(
+              type: isMe ? BubbleType.sendBubble : BubbleType.receiverBubble,
+            ),
+            backGroundColor: isMe
+                ? const Color(0xFF81758C)
+                : Color(0XFFFAFAFA),
+            margin: const EdgeInsets.all(0),
+            child: Container(
+              constraints: BoxConstraints(
+                maxWidth: MediaQuery.of(context).size.width * 0.7,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    userName,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                      color: isMe ? Color(0XFFFAFAFA) : Color(0XFF1A1A1A),
+                    ),
                   ),
-                  child: Column(
-                    crossAxisAlignment: isMe
-                        ? CrossAxisAlignment.end
-                        : CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        userName,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, color: Color(0xFF1A1A1A)),
-                      ),
-                      Text(
-                        message,
-                        style: TextStyle(color: Color(0xFF1A1A1A)),
-                      ),
-                    ],
+                  const SizedBox(height: 2),
+                  Text(
+                    message,
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: isMe ? Color(0XFFFAFAFA) : Color(0XFF1A1A1A),
+                    ),
                   ),
-                ),
+                ],
               ),
             ),
-          if (!isMe)
-            Padding(
-              padding: const EdgeInsets.fromLTRB(45, 10, 0, 0),
-              child: ChatBubble(
-                clipper: ChatBubbleClipper8(type: BubbleType.receiverBubble),
-                backGroundColor: Color(0xFF937EA8),
-                margin: EdgeInsets.only(top: 20),
-                child: Container(
-                  constraints: BoxConstraints(
-                    maxWidth: MediaQuery.of(context).size.width * 0.7,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: isMe
-                        ? CrossAxisAlignment.end
-                        : CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        userName,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF1A1A1A),
-                        ),
-                      ),
-                      Text(
-                        message,
-                        style: TextStyle(color: Color(0xFF1A1A1A)),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            )
+          ),
+          if (isMe) const SizedBox(width: 6),
+          if (isMe) CircleAvatar(radius: 16, backgroundImage: avatarImage),
         ],
       ),
-      Positioned(
-        top: 0,
-        right: isMe ? 5 : null,
-        left: isMe ? null : 5,
-        child: CircleAvatar(
-          backgroundImage: avatarImage,
-        ),
-      ),
-    ]);
+    );
   }
 }
