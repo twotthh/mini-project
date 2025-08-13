@@ -396,13 +396,13 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                   width: 90,
                   decoration: BoxDecoration(
                       color: Color(0XFFFAFAFA), // 홈화면가기 버튼
-                      borderRadius: BorderRadius.circular(50),
-                      boxShadow: [
-                        // BoxShadow(
-                        //   color: const Color(0xFF1A1A1A).withOpacity(0.3),
-                        //   blurRadius: 15,
-                        //   spreadRadius: 5),
-                    ],
+                      borderRadius: BorderRadius.circular(50)
+                    // boxShadow: [
+                    //   BoxShadow(
+                    //       color: const Color(0xFF1A1A1A).withOpacity(0.3),
+                    //       blurRadius: 15,
+                    //       spreadRadius: 5),
+                    // ],
                   ),
                   child: GestureDetector(
                     onTap: (){
@@ -411,7 +411,7 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return HomeScreen(username: '', email: '', password: '',);
+                            return HomeScreen();
                           },
                         ),
                       );
